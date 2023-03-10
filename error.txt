@@ -7,4 +7,10 @@ commemnted the 3 fields in the user serializer
 
 Invalid password format or unknown hashing algorithm.
 Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using this form.
-how to resolve this , when creating a new user and storing the password 
+how to resolve this , when creating a new user and storing the password
+
+{
+    "detail": "No active account found with the given credentials"
+}
+during token obtain,despite being the account active
+solved by changing the password from the admin panel  

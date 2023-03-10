@@ -3,14 +3,15 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from stackoverflow.models import Question
 from .serializers import QuestionSerializer,UserSerializer
-from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 
 class PostList(generics.ListCreateAPIView):
     queryset=Question.objects.all()
     serializer_class=QuestionSerializer
-    permission_classes=[IsAuthenticatedOrReadOnly]
+    # permission_classes=[IsAuthenticatedOrReadOnly]
+    permission_classes=[IsAuthenticated]
     
 class UserRegister(APIView):
     permission_classes=[AllowAny]
