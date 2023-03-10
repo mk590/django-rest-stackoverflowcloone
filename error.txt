@@ -1,0 +1,10 @@
+the comment was not saved without an answer 
+blank=true bhi add kar diya usmein
+
+AssertionError: The field 'answers' was declared on serializer UserSerializer, but has not been included in the 'fields' option.        
+commemnted the 3 fields in the user serializer
+
+
+Invalid password format or unknown hashing algorithm.
+Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using this form.
+how to resolve this , when creating a new user and storing the password 
