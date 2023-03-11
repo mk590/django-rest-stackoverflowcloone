@@ -115,6 +115,9 @@ const Posts = (props) => {
 											// className={classes.postTitle}
 										>
 											{post.text}
+											{post.answer}
+											{console.log(post.answer)}
+											{console.log(post.text)}
 										</Typography>
 										{/* <div className={classes.postText}>
 											<Typography color="textSecondary">
