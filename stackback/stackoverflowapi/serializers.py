@@ -12,7 +12,23 @@ class UserSerializer(serializers.ModelSerializer):
         fields=['username','password']
         
 class QuestionSerializer(serializers.ModelSerializer):
+    author=serializers.ReadOnlyField(source='author.username')
+    
     class Meta:
         model=Question
         fields=['text','tags','author','created_at']
-        author=serializers.ReadOnlyField(source='author.username')
+        
+
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+    @classmethod
+    # what does this do 
+    def get_token(cls, user):
+        token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        return token

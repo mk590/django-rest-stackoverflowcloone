@@ -13,6 +13,9 @@ class PostList(generics.ListCreateAPIView):
     # permission_classes=[IsAuthenticatedOrReadOnly]
     permission_classes=[IsAuthenticated]
     
+    def perform_create(self, serializer):
+     serializer.save(author=self.request.user)
+    
 class UserRegister(APIView):
     permission_classes=[AllowAny]
     
@@ -27,6 +30,13 @@ class UserRegister(APIView):
             return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
             
-            
+from .serializers import MyTokenObtainPairSerializer
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+
+class MyObtainTokenPairView(TokenObtainPairView):
+    permission_classes = (AllowAny,)
+    serializer_class = MyTokenObtainPairSerializer
 
 
