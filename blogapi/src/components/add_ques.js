@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import axiosInstance from '../axios';
 
 const Add_ques = () => {
     const [value, setValue] = useState("")
@@ -11,7 +12,7 @@ const Add_ques = () => {
     const handleSubmit=(e)=>{
         e.preventDefault()
     
-        axiosInstance.post('questions',{
+        axiosInstance.post('questions/',{
             text:value
           }).then((response)=>{
             console.log(response)

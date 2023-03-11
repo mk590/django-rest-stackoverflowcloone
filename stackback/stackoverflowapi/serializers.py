@@ -16,7 +16,8 @@ class QuestionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model=Question
-        fields=['text','tags','author','created_at']
+        # fields=['text','tags','author','created_at']
+        fields=['text','author','created_at']
         
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer

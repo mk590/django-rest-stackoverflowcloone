@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Add_ques from './add_ques';
+
 
 const useStyles = makeStyles((theme) => ({
 	cardMedia: {
@@ -126,6 +128,7 @@ const Posts = (props) => {
 					})}
 				</Grid>
 			</Container>
+<Add_ques/>
 		</React.Fragment>
 	);
 };
