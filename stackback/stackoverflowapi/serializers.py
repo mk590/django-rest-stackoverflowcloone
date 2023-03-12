@@ -16,6 +16,11 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = ['text']
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['text']
         
 class QuestionSerializer(serializers.ModelSerializer):
     author=serializers.ReadOnlyField(source='author.username')
@@ -24,12 +29,13 @@ class QuestionSerializer(serializers.ModelSerializer):
     # answers=serializers.RelatedField(many=True,queryset=Answer.objects.all())
     # answers=serializers.SlugRelatedField(many=True, slug_field='text',queryset=Answer.objects.all())
     answers = AnswerSerializer(many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model=Question
         # fields=['text','tags','author','created_at']
         # fields=['text','author','created_at']
         # fields=['text','author','created_at','answers']
-        fields=['text','author','created_at','answers','id']
+        fields=['text','author','created_at','answers','id','comments']
         
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer

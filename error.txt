@@ -26,3 +26,9 @@ read_only=`True`.
 stackoverflow.Answer: (models.E010) 'unique_together' must be a list or tuple.
 
 NotImplementedError: RelatedField.to_representation() must be implemented for field .
+
+Comment() got unexpected keyword arguments: 'question'
+comment_question
+
+comments nahi aa rahe the related name dalne se aa gaye 
+use of the related names ?

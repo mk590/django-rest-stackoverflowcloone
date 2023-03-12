@@ -37,14 +37,33 @@ export default function Post() {
     
         })
     }
+	const [value1, setValue1] = useState("")
+
+    function handlechange1(e) {
+        console.log(e.target.value)
+        setValue1(e.target.value)
+    }
+    const handleSubmit1=(e)=>{
+        e.preventDefault()
+    
+        axiosInstance.post(`question/${id}/comments/`,{
+            text:value1
+          }).then((response)=>{
+            console.log(response)
+    
+        })
+    }
 
 	const [data, setData] = useState({});
 	const [Answers, setAnswers] = useState([]);
+	const [Comments, setComments] = useState([]);
 	useEffect(() => {
 		axiosInstance.get(`question/${id}/`).then((res) => {
 			console.log(res.data);
 			setAnswers(res.data.answers)
+			setComments(res.data.comments)
 			console.log(Answers);
+			console.log(Comments);
 			setData(res.data);
 		});
 
@@ -99,6 +118,39 @@ export default function Post() {
 						/>
 						<button
 							onClick={handleSubmit}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						/>
+					</Typography>
+					{Comments.map((ans) => {
+						console.log(Comments)
+						return (
+							<Typography
+								variant="h5"
+								align="center"
+								color="textSecondary"
+								paragraph
+							>
+								{ans.text}
+							</Typography>
+						);
+					})}
+
+					<Typography
+						component="h1"
+						variant="h2"
+						align="center"
+						color="textPrimary"
+						gutterBottom
+					>
+						add a new comment
+						<input
+							type='text'
+							value={value1}
+							onChange={handlechange1}
+							className="border-2 border-green-500 p-2 rounded-lg"
+						/>
+						<button
+							onClick={handleSubmit1}
 							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
 						/>
 					</Typography>
