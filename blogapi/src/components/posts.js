@@ -95,10 +95,12 @@ const Posts = (props) => {
 							<Grid  xs={12} md={4}>
 								<Card className={classes.card}>
 									<Link
-										color="textPrimary"
+										// color="textPrimary"
 										// href={'post/' + post.slug}
 										// href={''+ post.slug}  --> serializer mein slug konadd karo 
-										// href={''+ post.title}
+										// href={'quetion/'+ post.id}
+										// href={'questions/'+ post.text}
+										href={'question/'+ post.id}
 										// className={classes.link}
 									>
 										{/* <CardMedia
@@ -106,7 +108,7 @@ const Posts = (props) => {
 											image="https://source.unsplash.com/random"
 											title="Image title"
 										/> */}
-									</Link>
+									{/* </Link> */}
 									<CardContent className={classes.cardContent}>
 										<Typography
 											gutterBottom
@@ -115,9 +117,9 @@ const Posts = (props) => {
 											// className={classes.postTitle}
 										>
 											{post.text}
-											{post.answer}
+											{/* {post.answer}
 											{console.log(post.answer)}
-											{console.log(post.text)}
+											{console.log(post.text)} */}
 										</Typography>
 										{/* <div className={classes.postText}>
 											<Typography color="textSecondary">
@@ -125,6 +127,7 @@ const Posts = (props) => {
 											</Typography>
 										</div> */}
 									</CardContent>
+									</Link>
 								</Card>
 							</Grid>
 						);

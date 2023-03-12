@@ -32,7 +32,12 @@ class Comment(models.Model):
 class Answer(models.Model):
     text=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
-    question=models.ForeignKey(Question,on_delete=models.CASCADE)
+    # question=models.ForeignKey(Question,on_delete=models.CASCADE)
+    question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='answers')
     
+    class Meta:
+        unique_together = ('question', 'author')
+        # ordering = ['author']
+        
     def __str__ (self):
         return self.text

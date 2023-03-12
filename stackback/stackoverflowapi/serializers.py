@@ -10,14 +10,26 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
         fields=['username','password']
+  
+  
+class AnswerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['text']
         
 class QuestionSerializer(serializers.ModelSerializer):
     author=serializers.ReadOnlyField(source='author.username')
-    
+    # answers=serializers.StringRelatedField(many=True)
+    # answers=serializers.RelatedField(many=True)
+    # answers=serializers.RelatedField(many=True,queryset=Answer.objects.all())
+    # answers=serializers.SlugRelatedField(many=True, slug_field='text',queryset=Answer.objects.all())
+    answers = AnswerSerializer(many=True, read_only=True)
     class Meta:
         model=Question
         # fields=['text','tags','author','created_at']
-        fields=['text','author','created_at']
+        # fields=['text','author','created_at']
+        # fields=['text','author','created_at','answers']
+        fields=['text','author','created_at','answers','id']
         
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer

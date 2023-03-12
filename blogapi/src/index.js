@@ -20,7 +20,7 @@ const routing = (
 				<Route path="/register"  element={ <Register /> } />
 				<Route path="/login" element={ <Login /> } />
 				<Route path="/logout" element={ <Logout /> } />
-				{/* <Route path="/post/:slug" element={ <Single /> } /> */}
+				<Route path="/question/:id" element={ <Single /> } />
 				{/* <Route path="/:slug" element={ <Single /> } /> */}
 			</Routes>
 			<Footer />

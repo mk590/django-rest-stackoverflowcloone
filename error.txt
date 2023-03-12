@@ -16,3 +16,13 @@ during token obtain,despite being the account active
 solved by changing the password from the admin panel 
 
 obtained the token but was not kind of logged in , done by changing the serttings in the jwt package 
+
+
+Original exception text was: 'Question' object has no attribute 'answers'.
+
+ Relational field must provide a `queryset` argument, override `get_queryset`, or set 
+read_only=`True`.
+
+stackoverflow.Answer: (models.E010) 'unique_together' must be a list or tuple.
+
+NotImplementedError: RelatedField.to_representation() must be implemented for field .

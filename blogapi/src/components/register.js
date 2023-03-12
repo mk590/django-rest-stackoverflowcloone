@@ -85,7 +85,7 @@ export default function SignUp() {
 		e.preventDefault();
 		console.log(data)
 
-		axiosInstance.post('/users/create/', {
+		axiosInstance.post('/user-register/', {
 			username: data.username,
 			password: data.password
 		}).then((res) => {

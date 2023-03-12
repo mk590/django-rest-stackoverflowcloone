@@ -18,17 +18,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Post() {
-	const { slug } = useParams();
+	const { id } = useParams();
 	const classes = useStyles();
 
-	const [data, setData] = useState({ posts: [] });
+	const [value, setValue] = useState("")
 
+    function handlechange(e) {
+        console.log(e.target.value)
+        setValue(e.target.value)
+    }
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+    
+        axiosInstance.post(`question/${id}/answers/`,{
+            text:value
+          }).then((response)=>{
+            console.log(response)
+    
+        })
+    }
+
+	const [data, setData] = useState({});
+	const [Answers, setAnswers] = useState([]);
 	useEffect(() => {
-		axiosInstance.get(slug).then((res) => {
-			setData({ posts: res.data });
+		axiosInstance.get(`question/${id}/`).then((res) => {
 			console.log(res.data);
+			setAnswers(res.data.answers)
+			console.log(Answers);
+			setData(res.data);
 		});
-       
+
 	}, [setData]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
@@ -44,15 +63,44 @@ export default function Post() {
 						color="textPrimary"
 						gutterBottom
 					>
-						{data.posts.title}
+						{data.text}
 					</Typography>
+					{/* {data.answers.map((answer)=>{
+							{console.log(answer)}
+						})} */}
+					{/* {data.answers} */}
+					{Answers.map((ans) => {
+						console.log(Answers)
+						return (
+							<Typography
+								variant="h5"
+								align="center"
+								color="textSecondary"
+								paragraph
+							>
+								{ans.text}
+							</Typography>
+						);
+					})}
+					
 					<Typography
-						variant="h5"
+						component="h1"
+						variant="h2"
 						align="center"
-						color="textSecondary"
-						paragraph
+						color="textPrimary"
+						gutterBottom
 					>
-						{data.posts.excerpt}
+						add a new answer
+						<input
+							type='text'
+							value={value}
+							onChange={handlechange}
+							className="border-2 border-green-500 p-2 rounded-lg"
+						/>
+						<button
+							onClick={handleSubmit}
+							className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+						/>
 					</Typography>
 				</Container>
 			</div>
