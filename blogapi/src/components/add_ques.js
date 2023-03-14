@@ -16,10 +16,6 @@ const Add_ques = () => {
             text:value
           }).then((response)=>{
             console.log(response)
-            // localStorage.setItem('access_token',response.data.access);
-            // localStorage.setItem('refresh_token',response.data.refresh);
-            // axiosInstance.defaults.headers['Authorization']='JWT '+localStorage.getItem('access');
-    
         })
     }
   return (

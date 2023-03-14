@@ -37,6 +37,8 @@ export default function Post() {
     
         })
     }
+
+
 	const [value1, setValue1] = useState("")
 
     function handlechange1(e) {
@@ -57,6 +59,8 @@ export default function Post() {
 	const [data, setData] = useState({});
 	const [Answers, setAnswers] = useState([]);
 	const [Comments, setComments] = useState([]);
+
+
 	useEffect(() => {
 		axiosInstance.get(`question/${id}/`).then((res) => {
 			console.log(res.data);
@@ -84,10 +88,6 @@ export default function Post() {
 					>
 						{data.text}
 					</Typography>
-					{/* {data.answers.map((answer)=>{
-							{console.log(answer)}
-						})} */}
-					{/* {data.answers} */}
 					{Answers.map((ans) => {
 						console.log(Answers)
 						return (

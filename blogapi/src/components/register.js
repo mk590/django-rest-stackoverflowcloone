@@ -36,41 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
 
-	// const history = useNavigate ();
-	// const initialFormData = Object.freeze({
-	// 	email: '',
-	// 	username: '',
-	// 	password: '',
-	// });
-
-	// const [formData, updateFormData] = useState(initialFormData);
-
-	// const handleChange = (e) => {
-	// 	updateFormData({
-	// 		...formData,
-	// 		// Trimming any whitespace
-	// 		[e.target.name]: e.target.value.trim(),
-	// 	});
-	// };
-
-	// const handleSubmit = (e) => {
-	// 	e.preventDefault();
-	// 	console.log(formData);
-
-	// 	axiosInstance
-	// 		.post(`user/create/`, {
-	// 			email: formData.email,
-	// 			user_name: formData.username,
-	// 			password: formData.password,
-	// 		})
-	// 		.then((res) => {
-	// 			history.push('/login');
-	// 			console.log(res);
-	// 			console.log(res.data);
-	// 		});
-	// };
-
-
 	const [data, setData] = useState({ username: '', password: '' });
 	const handleChange = (e) => {
 		setData(

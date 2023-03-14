@@ -21,7 +21,6 @@ const routing = (
 				<Route path="/login" element={ <Login /> } />
 				<Route path="/logout" element={ <Logout /> } />
 				<Route path="/question/:id" element={ <Single /> } />
-				{/* <Route path="/:slug" element={ <Single /> } /> */}
 			</Routes>
 			<Footer />
 		</React.StrictMode>

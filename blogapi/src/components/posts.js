@@ -43,89 +43,23 @@ const Posts = (props) => {
 	if (!posts || posts.length === 0) return <p>Can not find any posts, sorry</p>;
 	return (
 		<React.Fragment>
-			{/* <Container maxWidth="md" component="main">
-				<Grid container spacing={5} alignItems="flex-end">
-					{posts.map((post) => {
-						{console.log(post.slug)}
-						return (
-							// Enterprise card is full width at sm breakpoint
-							<Grid item key={post.id} xs={12} md={4}>
-								<Card className={classes.card}>
-									<Link
-										color="textPrimary"
-										// href={'post/' + post.slug}
-										// href={''+ post.slug}  --> serializer mein slug konadd karo 
-										href={''+ post.title}
-										className={classes.link}
-									>
-										<CardMedia
-											className={classes.cardMedia}
-											image="https://source.unsplash.com/random"
-											title="Image title"
-										/>
-									</Link>
-									<CardContent className={classes.cardContent}>
-										<Typography
-											gutterBottom
-											variant="h6"
-											component="h2"
-											className={classes.postTitle}
-										>
-											{post.title.substr(0, 50)}...
-										</Typography>
-										<div className={classes.postText}>
-											<Typography color="textSecondary">
-												{post.excerpt.substr(0, 40)}...
-											</Typography>
-										</div>
-									</CardContent>
-								</Card>
-							</Grid>
-						);
-					})}
-				</Grid>
-			</Container> */}
-
 			<Container maxWidth="md" component="main">
 				<Grid container spacing={5} alignItems="flex-end">
 					{posts.map((post) => {
-						// {console.log(post.slug)}
 						return (
-							// Enterprise card is full width at sm breakpoint
 							<Grid  xs={12} md={4}>
 								<Card className={classes.card}>
 									<Link
-										// color="textPrimary"
-										// href={'post/' + post.slug}
-										// href={''+ post.slug}  --> serializer mein slug konadd karo 
-										// href={'quetion/'+ post.id}
-										// href={'questions/'+ post.text}
 										href={'question/'+ post.id}
-										// className={classes.link}
 									>
-										{/* <CardMedia
-											className={classes.cardMedia}
-											image="https://source.unsplash.com/random"
-											title="Image title"
-										/> */}
-									{/* </Link> */}
 									<CardContent className={classes.cardContent}>
 										<Typography
 											gutterBottom
 											variant="h6"
 											component="h2"
-											// className={classes.postTitle}
 										>
 											{post.text}
-											{/* {post.answer}
-											{console.log(post.answer)}
-											{console.log(post.text)} */}
 										</Typography>
-										{/* <div className={classes.postText}>
-											<Typography color="textSecondary">
-												{post.excerpt.substr(0, 40)}...
-											</Typography>
-										</div> */}
 									</CardContent>
 									</Link>
 								</Card>

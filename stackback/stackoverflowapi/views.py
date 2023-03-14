@@ -7,10 +7,9 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny,IsAuth
 from rest_framework.response import Response
 from rest_framework import status
 
-class PostList(generics.ListCreateAPIView):
+class QuestionList(generics.ListCreateAPIView):
     queryset=Question.objects.all()
     serializer_class=QuestionSerializer
-    # permission_classes=[IsAuthenticatedOrReadOnly]
     permission_classes=[IsAuthenticated]
     
     def perform_create(self, serializer):
@@ -60,7 +59,7 @@ class CommentCreate(generics.CreateAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-class PostDetail(generics.RetrieveDestroyAPIView):
+class QuestionDetail(generics.RetrieveDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     

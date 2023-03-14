@@ -6,7 +6,6 @@ class Question(models.Model):
     text=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     created_at=models.DateTimeField(auto_now_add=True)
-    # tags=models.ForeignKey('Tag',on_delete=models.PROTECT,null=True)
     
     def __str__ (self):
         return self.text
@@ -21,11 +20,7 @@ class Comment(models.Model):
     text=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     created_time=models.DateTimeField(auto_now_add=True)
-    # comment_question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True)
-    # comment_question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,blank=True)
     comment_question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,blank=True,related_name='comments')
-    # comment_answer=models.ForeignKey('Answer',on_delete=models.CASCADE,null=True)
-    # comment_answer=models.ForeignKey('Answer',on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.text
@@ -33,7 +28,6 @@ class Comment(models.Model):
 class Answer(models.Model):
     text=models.CharField(max_length=200)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
-    # question=models.ForeignKey(Question,on_delete=models.CASCADE)
     question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='answers')
     
     class Meta:
