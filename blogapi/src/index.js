@@ -4,18 +4,20 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import App from './App';
-import Header from './components/header';
-import Footer from './components/footer';
-import Register from './components/register';
-import Login from './components/login';
-import Logout from './components/logout';
-import Single from './components/single';
+import Header from './components1/header';
+import Footer from './components1/footer';
+import Register from './components1/register';
+import Login from './components1/login';
+import Logout from './components1/logout';
+import Single from './components1/single';
+import Stackhome from './components/StackOverflow/index'
 
 const routing = (
 	<Router>
 		<React.StrictMode>
 			<Header />
 			<Routes>
+				{/* <Route exact path="/" element={ <App /> } /> */}
 				<Route exact path="/" element={ <App /> } />
 				<Route path="/register"  element={ <Register /> } />
 				<Route path="/login" element={ <Login /> } />
