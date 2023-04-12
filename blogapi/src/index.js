@@ -10,7 +10,7 @@ import Register from './components1/register';
 import Login from './components1/login';
 import Logout from './components1/logout';
 import Single from './components1/single';
-import Stackhome from './components/StackOverflow/index'
+
 
 const routing = (
 	<Router>
