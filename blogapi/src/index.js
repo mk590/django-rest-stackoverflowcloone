@@ -9,6 +9,7 @@ import Header from './components1/header';
 import Footer from './components1/footer';
 import Register from './components1/register';
 import Login from './components1/login';
+// import Login from './components1/LoginPage';
 import Logout from './components1/logout';
 import Single from './components1/single';
 import QuestionsPage from './components1/QuestionsPage';
