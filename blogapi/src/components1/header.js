@@ -1,87 +1,76 @@
-import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import { makeStyles } from '@material-ui/core/styles';
-import { NavLink } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
-import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
+import {useContext} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStackOverflow } from '@fortawesome/fontawesome-free-brands';
+import {Link} from 'react-router-dom';
+import UserContext from "./UserContext";
 
-const useStyles = makeStyles((theme) => ({
-	appBar: {
-		borderBottom: `1px solid ${theme.palette.divider}`,
-	},
-	link: {
-		margin: theme.spacing(1, 1.5),
-	},
-	toolbarTitle: {
-		flexGrow: 1,
-	},
-}));
+const StyledHeader = styled.header`
+  background-color: #393939;
+  box-shadow: 0 3px 3px rgba(0,0,0,.2);
+  display:grid;
+  grid-template-columns: 1fr 200px;
+  grid-column-gap: 20px;
+`;
+
+const LogoLink = styled(Link)`
+  color:#fff;
+  text-decoration: none;
+  display: inline-block;
+  height: 50px;
+  line-height: 30px;
+  padding: 0px 15px;
+  svg{
+    margin-top: 7px;
+    display: inline-block;
+    float:left;
+  }
+  span{
+    display: inline-block;
+    padding-left:5px;
+    padding-top: 10px;
+    font-size:1.2rem;
+    font-weight: 300;
+  }
+  b{
+    font-weight: normal;
+    display: inline-block;
+    margin-left:2px;
+  }
+`;
+
+const ProfileLink = styled(Link)`
+  color:#fff;
+  padding: 0 20px;
+  text-decoration: none;
+  line-height: 50px;
+  text-align: right;
+`;
 
 function Header() {
-	const classes = useStyles();
-	return (
-		<React.Fragment>
-			<CssBaseline />
-			<AppBar
-				position="static"
-				color="default"
-				elevation={0}
-				className={classes.appBar}
-			>
-				<Toolbar className={classes.toolbar}>
-					<Typography
-						variant="h6"
-						color="inherit"
-						noWrap
-						className={classes.toolbarTitle}
-					>
-						<Link
-							component={NavLink}
-							to="/"
-							underline="none"
-							color="textPrimary"
-						>
-							Blog
-						</Link>
-					</Typography>
-					<nav>
-						<Link
-							color="textPrimary"
-							href="#"
-							className={classes.link}
-							component={NavLink}
-							to="/register"
-						>
-							Register
-						</Link>
-					</nav>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/login"
-					>
-						Login
-					</Button>
-					<Button
-						href="#"
-						color="primary"
-						variant="outlined"
-						className={classes.link}
-						component={NavLink}
-						to="/logout"
-					>
-						Logout
-					</Button>
-				</Toolbar>
-			</AppBar>
-		</React.Fragment>
-	);
+  // const {user} = useContext(UserContext);
+  return (
+    <StyledHeader>
+      <LogoLink to={'/'} className="logo">
+        <FontAwesomeIcon icon={faStackOverflow} size="2x" />
+        <span>stack<b>overcloned</b></span>
+      </LogoLink>
+      {/*<form action="" className="search">*/}
+      {/*  <SearchInput type="text" placeholder="Search..."/>*/}
+      {/*</form>*/}
+      {/* {user && (
+        <ProfileLink to={'/users/'+user.id} className="profile">{user.name || user.email}</ProfileLink>
+      )} */}
+      {/* {!user && ( */}
+      { (
+        <div>
+          <ProfileLink to={'/login'} className="profile">Log in</ProfileLink>
+          <ProfileLink to={'/register'} className="profile">Register</ProfileLink>
+        </div>
+
+      )}
+    </StyledHeader>
+  );
 }
 
 export default Header;

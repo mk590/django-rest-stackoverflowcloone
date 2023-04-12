@@ -4,13 +4,14 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import App from './App';
+// import Header from './components1/oldheader';
 import Header from './components1/header';
 import Footer from './components1/footer';
 import Register from './components1/register';
 import Login from './components1/login';
 import Logout from './components1/logout';
 import Single from './components1/single';
-
+import QuestionsPage from './components1/QuestionsPage';
 
 const routing = (
 	<Router>
@@ -18,7 +19,7 @@ const routing = (
 			<Header />
 			<Routes>
 				{/* <Route exact path="/" element={ <App /> } /> */}
-				<Route exact path="/" element={ <App /> } />
+				<Route exact path="/" element={ <QuestionsPage /> } />
 				<Route path="/register"  element={ <Register /> } />
 				<Route path="/login" element={ <Login /> } />
 				<Route path="/logout" element={ <Logout /> } />
