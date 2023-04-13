@@ -13,6 +13,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {Navigate } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -38,6 +40,7 @@ export default function SignIn() {
 	const history = useNavigate ();
 	
 	const [credentials, setCredentials] = useState({username:'',password:''})
+	const [appstate, setAppstate]= useState({redirectToHomePage:false,error:false});
 	const handleChange=(e)=>{
 		setCredentials({
 			...credentials,
@@ -57,14 +60,18 @@ export default function SignIn() {
 			localStorage.setItem('access_token',response.data.access);
 			localStorage.setItem('refresh_token',response.data.refresh);
 			axiosInstance.defaults.headers['Authorization']='JWT '+localStorage.getItem('access');
-
-		})
+			setAppstate({redirectToHomePage:true,error:false})
+		}).catch(() => setAppstate({error:true}));
 	}
 	const classes = useStyles();
 
 	return (
+		
 		<Container component="main" maxWidth="xs">
 			<CssBaseline />
+			{appstate.redirectToHomePage && (
+        <Navigate  to={'/'} />
+      )}
 			<div className={classes.paper}>
 				<Avatar className={classes.avatar}></Avatar>
 				<Typography component="h1" variant="h5">

@@ -5,6 +5,7 @@ import Header1 from "./Header1";
 // import BlueButtonLink from "./BlueButtonLink";
 import axiosInstance from '../axios';
 import {Helmet} from "react-helmet";
+import Add_ques from './add_ques';
 
 const HeaderRow = styled.div`
   display: grid;
@@ -38,6 +39,7 @@ function QuestionsPage() {
           // tags={question.tags}
            />
       ))}
+      <Add_ques/>
     </main>
   );
 }

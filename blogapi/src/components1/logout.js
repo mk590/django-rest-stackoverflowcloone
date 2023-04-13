@@ -13,5 +13,5 @@ export default function SignUp() {
 		localStorage.removeItem('refresh_token');
 		axiosInstance.defaults.headers['Authorization'] = null;
 	});
-	return <div>Logout</div>;
+	return <div>Logged out</div>;
 }

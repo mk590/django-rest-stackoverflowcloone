@@ -65,6 +65,7 @@ function Header() {
       { (
         <div>
           <ProfileLink to={'/login'} className="profile">Log in</ProfileLink>
+          {/* <ProfileLink to={'/logout'} className="profile">Log Out</ProfileLink> */}
           <ProfileLink to={'/register'} className="profile">Register</ProfileLink>
         </div>
 

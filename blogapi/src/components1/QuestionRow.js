@@ -50,7 +50,7 @@ function QuestionRow({title,id,author,createdAt}) {
       <QuestionStat>1<span>answers</span></QuestionStat>
       <QuestionStat>6<span>views</span></QuestionStat>
       <QuestionTitleArea>
-        <QuestionLink to={'/questions/'+id}>{title}</QuestionLink>
+        <QuestionLink to={'question/'+id}>{title}</QuestionLink>
         <WhoAndWhen>
           <When>{createdAt}</When> <UserLink id={author.id}>{author.name || author.email}</UserLink>
         </WhoAndWhen>

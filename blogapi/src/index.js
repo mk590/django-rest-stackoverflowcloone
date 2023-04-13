@@ -11,8 +11,9 @@ import Register from './components1/register';
 import Login from './components1/login';
 // import Login from './components1/LoginPage';
 import Logout from './components1/logout';
-import Single from './components1/single';
+import Single from './oldcomp/single';
 import QuestionsPage from './components1/QuestionsPage';
+import QuestionPage from './components1/QuestionPage';
 
 const routing = (
 	<Router>
@@ -24,9 +25,10 @@ const routing = (
 				<Route path="/register"  element={ <Register /> } />
 				<Route path="/login" element={ <Login /> } />
 				<Route path="/logout" element={ <Logout /> } />
-				<Route path="/question/:id" element={ <Single /> } />
+				{/* <Route path="/question/:id" element={ <Single /> } /> */}
+				<Route path="/question/:id" element={ <QuestionPage /> } />
 			</Routes>
-			<Footer />
+			{/* <Footer /> */}
 		</React.StrictMode>
 	</Router>
 );

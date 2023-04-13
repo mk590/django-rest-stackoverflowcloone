@@ -1,0 +1,8 @@
+Frontend
+ - logged in / logout me se koi ek show hona
+-user sign upke time password wale issue ko resolve karna 
+
+
+-Views
+-Upvotes
+wale feature 
