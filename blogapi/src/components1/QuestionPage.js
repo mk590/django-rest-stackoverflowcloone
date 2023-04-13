@@ -67,6 +67,7 @@ const handleSubmit=(e)=>{
         text:answerBody
       }).then((response)=>{
         console.log(response)
+        window.location.reload(); 
 
     })
 }
@@ -86,7 +87,7 @@ const handleSubmit1=(e)=>{
         text:value1
       }).then((response)=>{
         console.log(response)
-
+        window.location.reload(); 
     })
 }
 
@@ -155,7 +156,7 @@ const handleSubmit1=(e)=>{
 							onChange={handlechange1}
 							className="border-2 border-green-500 p-2 rounded-lg"
 						/>
-        <BlueButton onClick={handleSubmit}>Post your comment</BlueButton>
+        <BlueButton onClick={handleSubmit1}>Post your comment</BlueButton>
 
 <hr/>
 <h3>Answers</h3>

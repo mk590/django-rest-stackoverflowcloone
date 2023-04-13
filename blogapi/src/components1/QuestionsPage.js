@@ -6,6 +6,8 @@ import Header1 from "./Header1";
 import axiosInstance from '../axios';
 import {Helmet} from "react-helmet";
 import Add_ques from './add_ques';
+import BlueButtonLink from './BlueLinkButton'
+import { NavLink } from 'react-router-dom';
 
 const HeaderRow = styled.div`
   display: grid;
@@ -28,7 +30,12 @@ function QuestionsPage() {
       </Helmet>
       <HeaderRow>
         <Header1 style={{margin:0}}>Questions</Header1>
-        {/* <BlueButtonLink to={'/ask'}>Ask&nbsp;Question</BlueButtonLink> */}
+        <BlueButtonLink >
+          <NavLink to={'/ask-question'} >
+          Ask&nbsp;Question
+
+          </NavLink>
+          </BlueButtonLink>
       </HeaderRow>
       {questions && questions.length > 0 && questions.map(question => (
         <QuestionRow
@@ -36,10 +43,8 @@ function QuestionsPage() {
           id={question.id}
           createdAt={question.created_at}
           author={{id: question.user_id, name:question.name, email:question.email}}
-          // tags={question.tags}
            />
       ))}
-      <Add_ques/>
     </main>
   );
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStackOverflow } from '@fortawesome/fontawesome-free-brands';
-import {Link} from 'react-router-dom';
+import {Link, Navigate, NavLink} from 'react-router-dom';
 import UserContext from "./UserContext";
 
 const StyledHeader = styled.header`
@@ -55,6 +55,7 @@ function Header() {
         <FontAwesomeIcon icon={faStackOverflow} size="2x" />
         <span>stack<b>overcloned</b></span>
       </LogoLink>
+        
       {/*<form action="" className="search">*/}
       {/*  <SearchInput type="text" placeholder="Search..."/>*/}
       {/*</form>*/}

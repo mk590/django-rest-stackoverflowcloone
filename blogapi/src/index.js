@@ -14,7 +14,7 @@ import Logout from './components1/logout';
 import Single from './oldcomp/single';
 import QuestionsPage from './components1/QuestionsPage';
 import QuestionPage from './components1/QuestionPage';
-
+import AskPage from './components1/AskPage';
 const routing = (
 	<Router>
 		<React.StrictMode>
@@ -27,6 +27,7 @@ const routing = (
 				<Route path="/logout" element={ <Logout /> } />
 				{/* <Route path="/question/:id" element={ <Single /> } /> */}
 				<Route path="/question/:id" element={ <QuestionPage /> } />
+				<Route path="/ask-question" element={ <AskPage /> } />
 			</Routes>
 			{/* <Footer /> */}
 		</React.StrictMode>
