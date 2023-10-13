@@ -7,6 +7,20 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny,IsAuth
 from rest_framework.response import Response
 from rest_framework import status
 
+class UserRegister(APIView):
+    permission_classes=[AllowAny]
+    
+    def post(self,request,format=None):
+        serialized_data=UserSerializer(data=request.data)
+        if serialized_data.is_valid():
+            user=serialized_data.save()
+            user.is_active=True
+            user.save()
+            return Response(serialized_data.data,status=status.HTTP_200_OK)
+        else:
+            return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+        
 class QuestionList(generics.ListCreateAPIView):
     queryset=Question.objects.all()
     serializer_class=QuestionSerializer
@@ -68,18 +82,6 @@ class QuestionDetail(generics.RetrieveDestroyAPIView):
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
     
-class UserRegister(APIView):
-    permission_classes=[AllowAny]
-    
-    def post(self,request,format=None):
-        serialized_data=UserSerializer(data=request.data)
-        if serialized_data.is_valid():
-            user=serialized_data.save()
-            user.is_active=True
-            user.save()
-            return Response(serialized_data.data,status=status.HTTP_200_OK)
-        else:
-            return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
 
             
 from .serializers import MyTokenObtainPairSerializer
