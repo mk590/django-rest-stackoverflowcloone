@@ -41,7 +41,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Question(models.Model):
     title = models.CharField(max_length=255,unique=True)
     body = models.TextField()
-    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,realted_name='questions')
+    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='questions')
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
     num_answers = models.PositiveIntegerField(default=0)
@@ -68,8 +68,8 @@ class Tag(models.Model):
 
 class Answer(models.Model):
     body=models.CharField(max_length=200)
-    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,realted_name="answers")
-    question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='answers')
+    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="answers")
+    question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='quesanswers')
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
     num_answers = models.PositiveIntegerField(default=0)
@@ -84,18 +84,18 @@ class Answer(models.Model):
     
 class QComment(models.Model):
     body=models.CharField(max_length=200)
-    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,realted_name="comments")
+    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="quescomments")
     created_time=models.DateTimeField(auto_now_add=True)
-    question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,related_name='comments')
+    question=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,related_name='quescomments')
 
     def __str__(self):
         return f"commet by {self.author} on {self.question}"
 
 class Acomment(models.Model):
     body=models.CharField(max_length=200)
-    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,realted_name="comments")
+    author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="anscomments")
     created_time=models.DateTimeField(auto_now_add=True)
-    answer=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,related_name='comments')
+    answer=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,related_name='anscomments')
 
     def __str__(self):
         return f"commet by {self.author} on {self.answer}"
@@ -106,4 +106,12 @@ class Acomment(models.Model):
 #  question se author fetch through foreign key 
 #  now think if we want to fetch all the question written by user then we have to check all the blogs and filter out those that are written by user but by using we can directly do teh username.questions
 #  here question is the name entered in the related field during makeing the foreign key 
+
+
+# You don't need to explicitly define a password field in your custom user model, as it is inherited from the base user classes.
+# but when creating or updating password we have to pass these fields in the serializers but since these are not in the models so handled a bit differently 
+#  see serializers file
+
+
+# **** related name same nahi dena hai other wise issue
 
