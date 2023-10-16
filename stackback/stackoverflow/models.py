@@ -78,7 +78,7 @@ class Question(SoftDelete):
     updated_at = models.DateTimeField(auto_now=True)
     upvoted_by = models.ManyToManyField(CustomUser, blank=True,related_name='upvoted_questions')
     downvoted_by = models.ManyToManyField(CustomUser, blank=True,related_name='downvoted_questions')
-    tags = models.ManyToManyField('Tag')
+    tags = models.ManyToManyField('Tag', blank=True)
     image = models.ImageField(upload_to="images/", blank=True,null=True)
     def __str__(self):
         return self.title

@@ -40,13 +40,17 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['text']
         
 class QuestionSerializer(serializers.ModelSerializer):
-    author=serializers.ReadOnlyField(source='author.username')
-    answers = AnswerSerializer(many=True, read_only=True)
-    comments = CommentSerializer(many=True, read_only=True)
+    image = serializers.ImageField(required=False)
+    # answers = AnswerSerializer(many=True, read_only=True)
+    # comments = CommentSerializer(many=True, read_only=True)
     class Meta:
         model=Question
-        fields=['title','body','author','upvotes','downvotes','num_answers','num_comments','created_at','updated_at','upvoted_by','downvoted_by','tags','image']
+        fields=['id','title','body','upvotes','downvotes','num_answers','num_comments','created_at','updated_at','upvoted_by','downvoted_by','tags','image']
         
+    def create(self, validated_data):
+        validated_data['author'] = self.context['request'].user
+        return super().create(validated_data)
+ 
 
 
 ''' 

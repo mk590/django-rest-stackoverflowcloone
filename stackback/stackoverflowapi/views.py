@@ -20,13 +20,18 @@ class UserRegister(APIView):
             return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
         
         
-# class QuestionList(generics.ListCreateAPIView):
-#     queryset=Question.objects.all()
-#     serializer_class=QuestionSerializer
-#     permission_classes=[IsAuthenticated]
+class QuestionList(generics.ListCreateAPIView):
+    queryset=Question.objects.all()
+    serializer_class=QuestionSerializer
+    permission_classes=[IsAuthenticated]
     
-#     def perform_create(self, serializer):
-#      serializer.save(author=self.request.user)
+    # def create(self,request,*args, **kwargs):
+    #     serializer = self.serializer_class(data=request.data)
+    #     print(request.user)
+    #     serializer.is_valid(raise_exception=True)
+    #     print(serializer.data)
+    #     serializer.save(author=request.user)
+    #     return Response(serializer.data,status=status.HTTP_201_CREATED)
     
 # class AnswerList(generics.ListAPIView):
 #     queryset = Answer.objects.all()

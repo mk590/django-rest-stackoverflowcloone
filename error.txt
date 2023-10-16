@@ -32,3 +32,23 @@ comment_question
 
 comments nahi aa rahe the related name dalne se aa gaye 
 use of the related names ?
+
+
+** whenever adding some custom thing like the user and all also update the setting ralted to that 
+
+Reverse accessor 'Question.comments' for 'stackoverflow.Acomment.answer' clashes with reverse accessor for 'stackoverflow.QComment.question'.
+        HINT: Add or change a related_name argument to the definition for 'stackoverflow.Acomment.answer' or 'stackoverflow.QComment.question'.
+
+Django automatically creates reverse accessors for relationships, and if two or more relationships have the same default reverse accessor name, you'll get a clash.
+
+sol unique related names 
+
+indention mistake are very fatal 
+
+not able to save the author while doing in the views to save the author by request.user 
+resolved by removing the logic from the views and adding it to the serializer itself 
+try to consolidate the logic at a single place 
+django mein no serializer so waha par views mein 
+yaha par serializer mein 
+jo request aa rahi wo serializer ke pass ja rahi before going to the models for saving so serializer ko cutomize kar diya 
+serializer hi request meinse user nikal kar save kar lega
