@@ -53,6 +53,7 @@ class QuestionSerializer(serializers.ModelSerializer):
  
 
 
+
 ''' 
 
  not to include the password field directly in the serializer. Instead, you would handle password-related operations separately
