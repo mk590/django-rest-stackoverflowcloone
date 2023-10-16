@@ -2,6 +2,7 @@ from django.db import models
 
 #  creating cutom user 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.utils.timezone import now
 
 #  creating manager for custom user model from the default manager
 class CustomUserManager(BaseUserManager):
@@ -38,7 +39,34 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
 
-class Question(models.Model):
+class SoftDeleteManager(models.Manager):
+
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted_at__isnull=True)
+    
+class SoftDelete(models.Model):
+
+    deleted_at = models.DateTimeField(null=True, default=None)
+    objects = SoftDeleteManager()
+    all_objects = models.Manager()
+
+    def soft_delete(self):
+        self.deleted_at = now()
+        self.save()
+
+    def restore(self):
+        self.deleted_at = None
+        self.save()
+
+    def delete(self, using=None, keep_parents=False):
+        self.soft_delete()
+        
+    
+    class Meta:
+        abstract = True
+
+
+class Question(SoftDelete):
     title = models.CharField(max_length=255,unique=True)
     body = models.TextField()
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='questions')
@@ -59,14 +87,14 @@ class Question(models.Model):
         return [choice[1] for choice in self.GENRE_CHOICES if choice[0] in self.tags]
 
     
-class Tag(models.Model):
+class Tag(SoftDelete):
     name=models.CharField(max_length=300)
     
     def __str__(self):
         return self.name
     
 
-class Answer(models.Model):
+class Answer(SoftDelete):
     body=models.CharField(max_length=200)
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="answers")
     question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='quesanswers')
@@ -82,7 +110,7 @@ class Answer(models.Model):
     def __str__ (self):
         return self.body
     
-class QComment(models.Model):
+class QComment(SoftDelete):
     body=models.CharField(max_length=200)
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="quescomments")
     created_time=models.DateTimeField(auto_now_add=True)
@@ -91,7 +119,7 @@ class QComment(models.Model):
     def __str__(self):
         return f"commet by {self.author} on {self.question}"
 
-class Acomment(models.Model):
+class Acomment(SoftDelete):
     body=models.CharField(max_length=200)
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="anscomments")
     created_time=models.DateTimeField(auto_now_add=True)

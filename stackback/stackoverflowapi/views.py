@@ -81,26 +81,3 @@ class UserRegister(APIView):
 #         serializer = self.get_serializer(instance)
 #         return Response(serializer.data)
     
-
-            
-# from .serializers import MyTokenObtainPairSerializer
-# from rest_framework.permissions import AllowAny
-# from rest_framework_simplejwt.views import TokenObtainPairView
-
-
-# class MyObtainTokenPairView(TokenObtainPairView):
-#     permission_classes = (AllowAny,)
-#     serializer_class = MyTokenObtainPairSerializer
-
-
-# from rest_framework_simplejwt.tokens import RefreshToken
-# class BlacklistTokenUpdateView(APIView):
-#     permission_classes=[AllowAny]
-#     def post(self,request):
-#         try:
-#             refresh_token = request.data["refresh_token"]
-#             token = RefreshToken(refresh_token)
-#             token.blacklist()
-#             return Response(status=status.HTTP_205_RESET_CONTENT)
-#         except Exception as e:
-#             return Response(status=status.HTTP_400_BAD_REQUEST)
