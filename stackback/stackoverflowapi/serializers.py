@@ -52,7 +52,36 @@ class QuestionSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['author'] = self.context['request'].user
         return super().create(validated_data)
- 
+    
+    def update(self, instance, validated_data):
+        instance.title=validated_data.get('title',instance.title)
+        instance.body=validated_data.get('body',instance.body)
+        request=self.context.get('request')
+        if request and hasattr(request,'user'):
+            user=request.user
+            if 'upvotes' in validated_data:
+                if user in instance.upvoted_by.all():
+                    instance.upvoted_by.remove(user)
+                    instance.upvotes-=1
+                else:
+                    instance.upvoted_by.add(user)
+                    instance.upvotes+=1
+                    if user in instance.downvoted_by.all():
+                        instance.downvoted_by.remove(user)
+                        instance.downvotes -= 1
+            elif 'downvotes' in validated_data:
+                if user in instance.downvoted_by.all():
+                    instance.downvoted_by.remove(user)
+                    instance.downvotes-=1
+                else:
+                    instance.downvoted_by.add(user)
+                    instance.downvotes += 1
+                    if user in instance.upvoted_by.all():
+                        instance.upvoted_by.remove(user)
+                        instance.upvotes -= 1
+               
+        instance.save()
+        return instance
 
 
 ''' 
