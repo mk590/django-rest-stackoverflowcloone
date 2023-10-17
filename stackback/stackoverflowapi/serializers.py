@@ -39,20 +39,31 @@ class CommentSerializer(serializers.ModelSerializer):
         # model = Comment
         fields = ['text']
         
-class QuestionSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(required=False)
-    author = UserSerializer(read_only=True)
-    # answers = AnswerSerializer(many=True, read_only=True)
-    # comments = CommentSerializer(many=True, read_only=True)
-    class Meta:
-        model=Question
-        fields=['id','title','author','body','upvotes','downvotes','num_answers','num_comments','created_at','updated_at','upvoted_by','downvoted_by','tags','image']
-        read_only_fields = ['author']
         
+        
+        
+class QuestionBaseSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(required=False)
+
+    class Meta:
+        model = Question
+        fields = ['id', 'title', 'body', 'author', 'upvotes', 'downvotes', 'num_answers', 'num_comments', 'created_at', 'updated_at', 'upvoted_by', 'downvoted_by', 'tags', 'image']
+
+class QuestionCreateSerializer(QuestionBaseSerializer):
+    # read_only_fields = ['author'] inherit in teh below way otherwise causes error here 
+    class Meta(QuestionBaseSerializer.Meta):
+        read_only_fields = ['author']
+
     def create(self, validated_data):
+        # Automatically set the author based on the authenticated user
         validated_data['author'] = self.context['request'].user
         return super().create(validated_data)
+
+class QuestionRetrieveSerializer(QuestionBaseSerializer):
+    author = UserSerializer(read_only=True)
     
+    
+class QuestionUpdateSerializer(serializers.ModelSerializer):    
     def update(self, instance, validated_data):
         instance.title=validated_data.get('title',instance.title)
         instance.body=validated_data.get('body',instance.body)

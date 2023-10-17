@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
 from stackoverflow.models import Acomment,QComment,Tag,Answer,Question,CustomUser
-from .serializers import QuestionSerializer,UserSerializer,AnswerSerializer,CommentSerializer
+from .serializers import QuestionCreateSerializer,QuestionRetrieveSerializer,QuestionUpdateSerializer,UserSerializer,AnswerSerializer,CommentSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -20,11 +20,24 @@ class UserRegister(APIView):
             return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
         
         
-class QuestionList(generics.ListCreateAPIView):
+class QuestionListView(generics.ListAPIView):
     queryset=Question.objects.all()
-    serializer_class=QuestionSerializer
+    serializer_class=QuestionRetrieveSerializer
+    permission_classes=[AllowAny]
+    
+    
+class QuestionCreateView(generics.CreateAPIView):
+    queryset=Question.objects.all()
+    serializer_class=QuestionCreateSerializer
     permission_classes=[IsAuthenticated]
     
+
+class QuestionView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionRetrieveSerializer
+    permission_classes=[IsAuthenticated]
+    
+
     # def create(self,request,*args, **kwargs):
     #     serializer = self.serializer_class(data=request.data)
     #     print(request.user)
@@ -76,13 +89,3 @@ class QuestionList(generics.ListCreateAPIView):
 #             serializer.save(author=self.request.user)
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-# class QuestionDetail(generics.RetrieveDestroyAPIView):
-#     queryset = Question.objects.all()
-#     serializer_class = QuestionSerializer
-    
-#     def retrieve(self, request, *args, **kwargs):
-#         instance = self.get_object()
-#         serializer = self.get_serializer(instance)
-#         return Response(serializer.data)
-    
