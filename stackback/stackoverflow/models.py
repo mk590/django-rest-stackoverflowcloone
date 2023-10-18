@@ -72,8 +72,6 @@ class Question(SoftDelete):
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='questions')
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
-    num_answers = models.PositiveIntegerField(default=0)
-    num_comments = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     upvoted_by = models.ManyToManyField(CustomUser, blank=True,related_name='upvoted_questions')
@@ -100,9 +98,9 @@ class Answer(SoftDelete):
     question=models.ForeignKey(Question,on_delete=models.CASCADE,related_name='quesanswers')
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
-    num_answers = models.PositiveIntegerField(default=0)
-    num_comments = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    upvoted_by = models.ManyToManyField(CustomUser, blank=True,related_name='upvoted_answers')
+    downvoted_by = models.ManyToManyField(CustomUser,blank=True,related_name='downvoted_answers')
     class Meta:
         unique_together = ('question', 'author')
         ordering = ['created_at']
@@ -123,7 +121,7 @@ class Acomment(SoftDelete):
     body=models.CharField(max_length=200)
     author=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name="anscomments")
     created_time=models.DateTimeField(auto_now_add=True)
-    answer=models.ForeignKey(Question,on_delete=models.CASCADE,null=True,related_name='anscomments')
+    answer=models.ForeignKey(Answer,on_delete=models.CASCADE,null=True,related_name='anscomments')
 
     def __str__(self):
         return f"commet by {self.author} on {self.answer}"

@@ -27,19 +27,18 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
             instance.save() #this will save this model instance in our database
         return instance
-            
-             
-class AnswerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Answer
-        fields = ['text']
 
-class CommentSerializer(serializers.ModelSerializer):
+class QCommentSerializer(serializers.ModelSerializer):
     class Meta:
-        # model = Comment
-        fields = ['text']
+        model = QComment
+        fields = ['id','body','author','created_time','question']
+        read_only_fields=['author','question']
         
-        
+class ACommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Acomment
+        fields=['id','body','author','created_time','answer']     
+        read_only_fields=['author','answer']  
         
         
 class QuestionBaseSerializer(serializers.ModelSerializer):
@@ -47,7 +46,7 @@ class QuestionBaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ['id', 'title', 'body', 'author', 'upvotes', 'downvotes', 'num_answers', 'num_comments', 'created_at', 'updated_at', 'upvoted_by', 'downvoted_by', 'tags', 'image']
+        fields = ['id', 'title', 'body', 'author', 'upvotes', 'downvotes', 'created_at', 'updated_at', 'upvoted_by', 'downvoted_by', 'tags', 'image']
 
 class QuestionCreateSerializer(QuestionBaseSerializer):
     # read_only_fields = ['author'] inherit in teh below way otherwise causes error here 
@@ -61,9 +60,7 @@ class QuestionCreateSerializer(QuestionBaseSerializer):
 
 class QuestionRetrieveSerializer(QuestionBaseSerializer):
     author = UserSerializer(read_only=True)
-    
-    
-class QuestionUpdateSerializer(serializers.ModelSerializer):    
+       
     def update(self, instance, validated_data):
         instance.title=validated_data.get('title',instance.title)
         instance.body=validated_data.get('body',instance.body)
@@ -95,6 +92,23 @@ class QuestionUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 
+             
+class AnswerBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Answer
+        fields = ['id', 'body', 'author', 'upvotes', 'downvotes','created_at','upvoted_by', 'downvoted_by','question']
+
+
+class AnswerCreateSerializer(AnswerBaseSerializer):
+    class Meta(AnswerBaseSerializer.Meta):
+        read_only_fields = ['author','question']
+        
+        
+class AnswerRetrieveSerializer(AnswerBaseSerializer):
+        author=UserSerializer(read_only=True)
+        
+
+            
 ''' 
 
  not to include the password field directly in the serializer. Instead, you would handle password-related operations separately
