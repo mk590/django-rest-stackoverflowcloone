@@ -4,6 +4,13 @@
 
 
 #### Stack Overflow is a web application that provides a platform for users to ask and answer questions on various topics related to programming, similar to the popular Q&A website, Stack Overflow.
+
+# Demo
+
+
+https://github.com/mk590/django-rest-stackoverflowcloone/assets/84888245/892eed92-460d-42f5-aa74-d2e44b0e0f71
+
+
 > 
 
 [![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/rajaprerak/MusicPlayer/commits/master)
@@ -17,6 +24,7 @@
 
 ## DB Modeling
 ![my_project_visualized](https://github.com/mk590/django-rest-stackoverflowcloone/assets/84888245/333d7f65-5a30-40fd-88b6-f27df3db7291)
+
 
 
 # Incorporated Code Practices
@@ -33,34 +41,30 @@ Use of axios interceptor for DRY method practice
 ## 1. Clone this repository:
 >https://github.com/mk590/django-rest-stackoverflowcloone.git
 
-## 2 . Create a virtual environment:
-```bash
-  python3 -m venv env
-```
-## 3. Activate the virtual environment:
-```bash
-  source env/bin/activate
-```
-## 4. Install the project dependencies:
+## 2. Install the project dependencies:
 ```bash
   pip install -r requirements.txt
 ```
-## 5. Set up the database:
+## 3. Set up the database:
 ```bash
   python manage.py migrate
 
 ```
-## 7 . Create a superuser account:
+## 4 . Create a superuser account:
 ```bash
   python manage.py createsuperuserr
 ```
-## 8 . Move to the frontend directory and install dependencies
+## 5 . Run the server
+```bash
+  python manage.py runserver
+```
+## 6 . Move to the frontend folder and install dependencies
 ```bash
   npm install
 ```
-## 9 . Run the server
+## 7 . Launch Frontend 
 ```bash
-  python manage.py runserver
+  npm start
 ```
 ---
 
@@ -74,24 +78,6 @@ Use of axios interceptor for DRY method practice
 #### 4. Users can search for questions by keywords
 #### 5 . Admin users can manage users, questions, and answers.
 ---
-
-## Usage:
-### To use Django Stack Overflow, follow these steps:
-## 1. Run the server:
-
-```bash
-  python manage.py runserver
-```
-
-## 2. Open your web browser and go to:
->'http://localhost:8000/'
-## 3 . Sign up for a new account or log in with an existing one.
-
-## 4. Start questions and answers.
-
-
-
-
 
 
 ## Contributing 💡
@@ -117,7 +103,7 @@ Use of axios interceptor for DRY method practice
 - 🔃 Create a new pull request.
 ## Creadits :
 
-#### Django Stack Overflow was created by Mohammad Burhan
+#### Django Stack Overflow was created by Mohit
 
 
 ## License
