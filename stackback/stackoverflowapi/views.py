@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import generics
-from stackoverflow.models import Acomment,QComment,Tag,Answer,Question
-from .serializers import QuestionCreateSerializer,QuestionRetrieveSerializer,UserSerializer,AnswerRetrieveSerializer,AnswerCreateSerializer,QCommentSerializer,ACommentSerializer
+from stackoverflow.models import Acomment,QComment,Tag,Answer,Question,CustomUser
+from .serializers import QuestionCreateSerializer,QuestionRetrieveSerializer,UserSerializer,AnswerRetrieveSerializer,AnswerCreateSerializer,QCommentSerializer,ACommentSerializer,UserDetailSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly,AllowAny,IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -19,6 +19,26 @@ class UserRegister(APIView):
         else:
             return Response(serialized_data.errors,status=status.HTTP_400_BAD_REQUEST)
         
+class UserDetailView(APIView): 
+    permission_classes=[IsAuthenticated]
+    
+    def get(self,request,format=None):
+        user_received=request.user
+        serialized=UserDetailSerializer(user_received)
+        return Response(serialized.data)
+ 
+class UserLogout(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        try:
+            refresh_token = request.data.get("refresh_token")
+            if not refresh_token:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+            
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
         
 class QuestionListView(generics.ListAPIView):
     queryset=Question.objects.all()
@@ -42,7 +62,15 @@ class AnswerListView(generics.ListAPIView):
     queryset=Answer.objects.all()
     serializer_class=AnswerRetrieveSerializer
     permission_classes=[AllowAny]
+
+class Qans(generics.ListAPIView):
+    serializer_class=AnswerRetrieveSerializer
+    permission_classes=[IsAuthenticated] 
     
+    def get_queryset(self):
+        ques_id=self.kwargs['question_id']
+        queryset=Answer.objects.filter(question=ques_id)
+        return queryset
     
 class AnswerCreateView(generics.CreateAPIView):
     queryset=Answer.objects.all()

@@ -1,0 +1,13 @@
+.NavLinks {
+  color: black;
+  font: bold;
+  border-radius: 2em;
+  font-size: large;
+}
+
+.NavDiv{
+  display:flex;
+  margin-left: 0px;
+  margin-right: 0px;
+ width: 100%;
+}

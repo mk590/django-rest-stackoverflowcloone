@@ -1,0 +1,27 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.rightMainblock{
+    font-weight: bolder;
+}
+.rightColor{
+    background-color:#FBFFB1;
+}
+
+.parent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.child {
+  flex: 1;
+  margin: 0 10px;
+  text-align: center;
+  background-color: #C8B6A6;
+  color: black;
+  border-radius: 4px;
+  border-color: red;
+}

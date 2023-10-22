@@ -28,6 +28,11 @@ class UserSerializer(serializers.ModelSerializer):
             instance.save() #this will save this model instance in our database
         return instance
 
+class UserDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=CustomUser
+        fields=['id','first_name','last_name']
+
 class QCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = QComment
@@ -39,14 +44,19 @@ class ACommentSerializer(serializers.ModelSerializer):
         model=Acomment
         fields=['id','body','author','created_time','answer']     
         read_only_fields=['author','answer']  
-        
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Tag
+        fields=['id','name']        
         
 class QuestionBaseSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
-
+    tags=TagSerializer(many=True,read_only=True)
+    comments=QCommentSerializer(many=True,read_only=True)
     class Meta:
         model = Question
-        fields = ['id', 'title', 'body', 'author', 'upvotes', 'downvotes', 'created_at', 'updated_at', 'upvoted_by', 'downvoted_by', 'tags', 'image']
+        fields = ['id', 'title', 'body', 'author', 'upvotes', 'downvotes', 'created_at', 'updated_at', 'upvoted_by', 'downvoted_by', 'tags', 'image','comments']
 
 class QuestionCreateSerializer(QuestionBaseSerializer):
     # read_only_fields = ['author'] inherit in teh below way otherwise causes error here 
@@ -94,6 +104,7 @@ class QuestionRetrieveSerializer(QuestionBaseSerializer):
 
              
 class AnswerBaseSerializer(serializers.ModelSerializer):
+    comments=ACommentSerializer(many=True,read_only=True)
     class Meta:
         model = Answer
         fields = ['id', 'body', 'author', 'upvotes', 'downvotes','created_at','upvoted_by', 'downvoted_by','question']

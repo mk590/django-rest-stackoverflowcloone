@@ -132,7 +132,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # custome user model
-# AUTH_USER_MODEL = 'stackback.CustomUser'
 AUTH_USER_MODEL = 'stackoverflow.CustomUser'
 # to tell the auth system to use this for authentication 
 
@@ -145,6 +144,8 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
    "http://localhost:3000",
 ]
+
+CORS_ALLOW_CREDENTIALS = True
 
 from datetime import timedelta
 
